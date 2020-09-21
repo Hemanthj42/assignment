@@ -1,0 +1,135 @@
+Q2:Document steps to install Git, Java 11 (including setting up JAVA_HOME), Maven,
+MySQL, NodeJS, Angular CLI
+
+
+ANS:
+
+install git::::::::::: 
+
+sudo apt update
+sudo apt install git
+git -version
+
+-------------------------------------------------
+install java11 and setup java_home ::::::
+
+sudo apt install default-jre
+java -version
+sudo apt install default-jdk
+java -version
+
+sudo apt install openjdk-8-jdk
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+echo $JAVA_HOME
+export PATH=$PATH:$JAVA_HOME/bin
+echo $PATH
+java -version
+
+-------------------------------------------------
+install maven:
+
+
+sudo apt install maven
+mvn -version
+
+-----------------------------------------------
+install mysql
+
+sudo apt install mysql-server
+sudo systemctl status mysql
+sudo mysql_secure_installation
+ sudo mysql
+   ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'very_strong_password';
+   FLUSH PRIVILEGES;
+
+   GRANT ALL PRIVILEGES ON *.* TO 'administrator'@'localhost' IDENTIFIED BY 'very_strong_password';
+
+------------------------------------------------------------------------------------------
+install node.js:
+
+sudo apt-get -y install curl dirmngr apt-transport-https lsb-release ca-certificates vim
+curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+sudo apt-get -y install nodejs
+sudo apt-get install gcc g++ make
+node --version
+npm --version
+
+install anguler Cli:
+
+sudo npm install -g @angular/cli
+ng --version
+cd angular-frontend
+
+
+--------------------------------------------------------------------------------------------
+#Q1.Create a Flowchart for the steps required and document the commands to setup a
+JavaSpring boot based API server application with Angular UI on a Ubuntu 18 based
+System.
+
+
+ANS:
+
+
+1.Install Node.js for Angular
+
+2.Install Angular-CLI
+
+3.Create Angular Client Project
+
+4.Import Angular Client Project
+
+5.Generate Components
+       ng generate module
+       ng generate service
+       ng generate component
+
+6.Create Spring Boot Application
+7.Integrate Angular and Spring Boot
+
+#Angular4-Client and Spring Boot server worked independently on ports 8080 and 4200. 
+The goal of the below integration is to ensure that client at 4200 will proxy any API requests to the server.
+
+8.Create a file proxy.conf.json under project
+content :
+{
+"/api":{
+"target": "http://localhost:8080",
+"secure": false
+}
+}
+
+9.Edit package.json file for start script:
+"start": "ng serve --proxy-config proxy.conf.json",
+
+
+10.Build and run Spring Boot
+  mvn clean install
+  mvn spring-boot:run
+
+11.Build and Run 
+ ng build
+ npm start
+
+
+
+------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
